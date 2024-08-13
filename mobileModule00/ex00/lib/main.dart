@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Mobile Module00 - ex00',
         theme: ThemeData(// This is the theme of your application.
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 11, 198, 55)),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
         home: const MyHomePage(),
@@ -40,28 +40,75 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    // var appState = context.watch<MyAppState>();
+    // var pair = appState.current;
 
     return Scaffold(
-      body: Column (
-        children: [
-          const Text('A simple text',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.blue,
+      body: Center(
+        child: Column (
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SimpleText(),
+            // BigCard(pair: pair),
+            const SizedBox(height: 10),
+            ElevatedButton (
+              onPressed: () {
+                logger.i('Button pressed');
+              },
+              child: const Text('Click me'),
             ),
-          ),
-          Text(appState.current.asLowerCase),
-          ElevatedButton (
-            onPressed: () {
-              logger.i('Button pressed');
-            },
-            child: const Text('Click me'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+class SimpleText extends StatelessWidget {
+  const SimpleText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
+
+    return Card(
+        color: theme.colorScheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('A simple text', style: style),
+        ),
+    );
+  }
+}
+
+// class BigCard extends StatelessWidget {
+//   const BigCard({
+//     super.key,
+//     required this.pair,
+//   });
+
+//   final WordPair pair;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     final style = theme.textTheme.displayMedium!.copyWith(
+//       color: theme.colorScheme.onPrimary,
+//     );
+
+//     return Card(
+//       color: theme.colorScheme.primary,
+//       child: Padding(
+//         padding: const EdgeInsets.all(20),
+//         child: Text(pair.asPascalCase, style: style),
+//       ),
+//     );
+//   }
+// }
 
 
