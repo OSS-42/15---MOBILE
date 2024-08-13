@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'package:provider/provider.dart'; //pour le provider
 import 'package:logger/logger.dart'; //pour logger en console plutot que print.
 
 // to add a log in the console instead of print().
@@ -17,22 +15,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Mobile Module00 - ex00',
         theme: ThemeData(// This is the theme of your application.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
         home: const MyHomePage(),
-      ),
     );
   }
-}
-
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
 }
 
 class MyHomePage extends StatelessWidget {
@@ -49,7 +40,6 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SimpleText(),
-            // BigCard(pair: pair),
             const SizedBox(height: 10),
             ElevatedButton (
               onPressed: () {
@@ -85,30 +75,5 @@ class SimpleText extends StatelessWidget {
     );
   }
 }
-
-// class BigCard extends StatelessWidget {
-//   const BigCard({
-//     super.key,
-//     required this.pair,
-//   });
-
-//   final WordPair pair;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     final style = theme.textTheme.displayMedium!.copyWith(
-//       color: theme.colorScheme.onPrimary,
-//     );
-
-//     return Card(
-//       color: theme.colorScheme.primary,
-//       child: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: Text(pair.asPascalCase, style: style),
-//       ),
-//     );
-//   }
-// }
 
 
