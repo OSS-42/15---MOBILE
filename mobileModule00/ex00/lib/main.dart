@@ -34,7 +34,10 @@ class MyApp extends StatelessWidget {
               ResultField(width: width),
               const SizedBox(height: 10),
               Expanded(
-                child: ButtonField(height: height * 0.5),
+                child: Container(
+                  // color: Colors.blue,
+                  child: ButtonField(height: height * 0.5),
+                ),
               ),
             ],
           ),
@@ -119,16 +122,39 @@ class ButtonField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final buttons = [
-      ['7','8','9','C','AC'],
-      ['4','5','6','+','-'],
-      ['1','2','3','*','/'],
-      ['0','.','00','=', ''],
+      [
+        {'label': '7', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '8', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '9', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': 'C', 'style': TextStyle(color: Colors.red, backgroundColor: Colors.grey.withOpacity(0.2))},
+        {'label': 'AC', 'style': TextStyle(color: Colors.red, backgroundColor: Colors.grey.withOpacity(0.2))},
+      ],
+      [
+        {'label': '4', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '5', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '6', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '+', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+        {'label': '-', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+      ],
+      [
+        {'label': '1', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '2', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '3', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '*', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+        {'label': '/', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+      ],
+      [
+        {'label': '0', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '.', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '00', 'style': const TextStyle(color: Colors.white, backgroundColor: Colors.blue)},
+        {'label': '=', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+        {'label': '', 'style': TextStyle(color: Colors.black, backgroundColor: Colors.blue.withOpacity(0.5))},
+      ],
     ];
     // double height = MediaQuery.of(context).size.height;
 
   
-          return Expanded(
-            child: GridView.builder(
+          return GridView.builder(
               itemCount: buttons.length * buttons[0].length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
@@ -138,13 +164,27 @@ class ButtonField extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final row = index ~/ 5;
                 final col = index % 5;
+                final button = buttons[row][col] as Map<String, dynamic>;
+                final buttonStyle = button['style'] as TextStyle;
+
                 return TextButton(
-                  onPressed: () => logger.i('Button ${buttons[row][col]} pressed'),
-                  child: Text(buttons[row][col]),
+                  onPressed: () => logger.i('Button ${button['label']} pressed'),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(buttonStyle.backgroundColor),
+                    shape: WidgetStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero),
+                    )
+                  ),
+                  child: Text(
+                    button['label'] as String,
+                    style: TextStyle(
+                      color: buttonStyle.color,
+                      fontSize: 40),
+                  ),
                 );
               },
-            ),
-          );
+            );
   }
 }
 
