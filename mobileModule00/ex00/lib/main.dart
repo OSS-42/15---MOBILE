@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart'; //pour logger en console plutot que print.
+import 'package:auto_size_text/auto_size_text.dart';
 
 // to add a log in the console instead of print().
 var logger = Logger(
@@ -21,7 +22,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Calculator'),
+          title: const AutoSizeText(
+            'Calculator',
+            maxLines: 1,
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.white,
+            ),
+          ),
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
         ),
@@ -35,11 +43,9 @@ class MyApp extends StatelessWidget {
                   const SizedBox(height: 10),
                   ResultField(width: width),
                   const SizedBox(height: 10),
-                  Expanded(
-                    child: Container(
-                      // color: Colors.blue,
-                      child: ButtonField(height: height * 0.5),
-                    ),
+                  const Spacer(),
+                  Flexible(
+                      child: ButtonField(height: height),
                   ),
                 ],
               );
@@ -51,31 +57,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class MyHomePage extends StatelessWidget {
-//   const MyHomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Calculator'),
-//       ),
-//       body: const Column(
-//           children: [
-//             ExpressionField(),
-//             SizedBox(height: 10),
-//             ResultField(),
-//             SizedBox(height: 10),
-//             ButtonField(),
-//           ],
-//         ),
-//       );
-//   }
-// }
-
 class ExpressionField extends StatelessWidget {
   final double width;
+
   const ExpressionField({super.key, required this.width});
 
   @override
@@ -84,13 +68,14 @@ class ExpressionField extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      child: const Text(
+      child: const AutoSizeText(
         'Expression Field',
         textAlign: TextAlign.right,
         style: TextStyle(
           fontSize: 30,
           color: Colors.blue,
         ),
+        maxLines: 1,
       ),
     );
   }
@@ -106,7 +91,7 @@ class ResultField extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      child: const Text(
+      child: const AutoSizeText(
         'Result Field',
         textAlign: TextAlign.right,
         style: TextStyle(
@@ -114,6 +99,7 @@ class ResultField extends StatelessWidget {
           color: Colors.blue,
           fontWeight: FontWeight.bold,
         ),
+        maxLines: 1,
       ),
     );
   }
@@ -162,9 +148,9 @@ class ButtonField extends StatelessWidget {
               itemCount: buttons.length * buttons[0].length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
-                childAspectRatio: (MediaQuery.of(context).size.width / 5) /
-                    (MediaQuery.of(context).size.height / 5),
-              ),
+                childAspectRatio: (MediaQuery.of(context).size.width / 2) /
+                 (MediaQuery.of(context).size.height / 4),
+                ),
               itemBuilder: (BuildContext context, int index) {
                 final row = index ~/ 5;
                 final col = index % 5;
@@ -180,15 +166,17 @@ class ButtonField extends StatelessWidget {
                         borderRadius: BorderRadius.zero),
                     )
                   ),
-                  child: Text(
+                  child: AutoSizeText(
                     button['label'] as String,
                     style: TextStyle(
+                      fontSize: 30,
                       color: buttonStyle.color,
-                      fontSize: 40),
+                    ),
+                  maxLines: 1,
                   ),
                 );
               },
-            );
+          );
   }
 }
 
