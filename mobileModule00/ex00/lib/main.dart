@@ -27,19 +27,23 @@ class MyApp extends StatelessWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: Column(
-            children: [
-              ExpressionField(width: width),
-              const SizedBox(height: 10),
-              ResultField(width: width),
-              const SizedBox(height: 10),
-              Expanded(
-                child: Container(
-                  // color: Colors.blue,
-                  child: ButtonField(height: height * 0.5),
-                ),
-              ),
-            ],
+          child: OrientationBuilder(
+            builder: (context, orientation) {
+              return Column(
+                children: [
+                  ExpressionField(width: width),
+                  const SizedBox(height: 10),
+                  ResultField(width: width),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: Container(
+                      // color: Colors.blue,
+                      child: ButtonField(height: height * 0.5),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
