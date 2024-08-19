@@ -12,12 +12,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Mobile Module00 - ex00',
-        theme: ThemeData(// This is the theme of your application.
+        theme: ThemeData( // This is the theme of your application.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
@@ -31,33 +30,33 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var appState = context.watch<MyAppState>();
-    // var pair = appState.current;
 
     return Scaffold(
-      body: Center(
-        child: Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SimpleText(),
-            const SizedBox(height: 10),
-            ElevatedButton (
-              onPressed: () {
-                logger.i('Button pressed');
-              },
-              child: const Text('Click me'),
+      body: OrientationBuilder (
+        builder: (context, orientation) {
+          return Center (
+            child: Column (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SimpleText(),
+                const SizedBox(height: 10),
+                ElevatedButton (
+                  onPressed: () {
+                    logger.i('Button pressed');
+                  },
+                  child: const Text('Click me'),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 }
 
 class SimpleText extends StatelessWidget {
-  const SimpleText({
-    super.key,
-  });
+  const SimpleText({super.key,});
 
   @override
   Widget build(BuildContext context) {
