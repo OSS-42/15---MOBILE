@@ -39,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: OrientationBuilder (
-        builder: (context, orientation) {
+      body: Builder (
+        builder: (context) {
           return Center(
             child: Column (
               mainAxisAlignment: MainAxisAlignment.center,
