@@ -16,24 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Mobile Module00 - ex00',
-        theme: ThemeData( // This is the theme of your application.
+        // This is the theme of your application.
+        theme: ThemeData( 
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
-        home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      body: OrientationBuilder (
-        builder: (context, orientation) {
+        home: Scaffold(
+      body: Builder (
+        builder: (context) {
+          // var orientation = MediaQuery.of(context).orientation;
           return Center (
             child: Column (
               mainAxisAlignment: MainAxisAlignment.center,
@@ -46,11 +37,13 @@ class MyHomePage extends StatelessWidget {
                   },
                   child: const Text('Click me'),
                 ),
+                // Text('Orientation: $orientation'),
               ],
             ),
           );
         },
       ),
+     ),
     );
   }
 }
