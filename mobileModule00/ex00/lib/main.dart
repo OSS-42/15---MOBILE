@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
                   ResultField(width: width),
                   const SizedBox(height: 10),
                   const Spacer(),
-                  Flexible(
+                  Expanded(
                       child: ButtonField(height: height),
                   ),
                 ],
